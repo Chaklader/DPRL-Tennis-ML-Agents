@@ -145,12 +145,3 @@ AlphaZero enhances the MCTS algorithm by using neural networks to guide the sear
 ![Alt text](./images/AlphaZero.png)
 
 <br>
-
-
-––––––
-
-<br>
-
-![Alt text](./images/AlphaZero.png)
-
-<br>
