@@ -1,147 +1,70 @@
-# Multi-Agent Reinforcement Learning
+In the README, you should only have
 
-Multi-Agent Reinforcement Learning (MARL) is an extension of traditional reinforcement learning where multiple agents learn to interact with an environment and with each other simultaneously. Each agent must learn optimal policies while considering the actions and strategies of other agents in the system.
-
-<br>
-
-![Alt text](./images/chart.png)
-
-<br>
-
-## Key Concepts
-
-- **Multiple Agents**: Two or more autonomous agents that can perceive, decide, and act independently
-- **Joint Action Space**: The combined action space of all agents in the system
-- **Partial Observability**: Agents may have limited information about the environment and other agents
-- **Emergent Behavior**: Complex system behaviors that arise from the interactions between agents
-
-## Common Challenges
-
-1. **Non-stationarity**: The environment becomes dynamic as all agents learn simultaneously
-2. **Scalability**: Exponential growth in complexity with increasing number of agents
-3. **Credit Assignment**: Determining each agent's contribution to team success
-4. **Communication**: Coordinating actions between agents effectively
-
-## Popular MARL Algorithms
-
-- Independent Q-Learning (IQL)
-- Multi-Agent Deep Deterministic Policy Gradient (MADDPG)
-- Counterfactual Multi-Agent Policy Gradients (COMA)
-- Multi-Agent Proximal Policy Optimization (MAPPO)
-
-## Applications
-
-- Autonomous vehicles coordination
-- Robot swarm control
-- Game AI and strategy games
-- Smart grid management
-- Network routing optimization
-
-## Zero Sum Games
+- Information what the project is about
+- What dependencies to set up and the installation method
+- How to run the project successfully
 
 
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+[//]: # (Image References)
 
-A zero-sum game is a situation where one participant's gain is exactly equal to another participant's loss, making the net change in wealth or benefit zero. For example, in poker, the money won by one player is exactly equal to the money lost by other players, and in chess, when one player wins (+1), the other must lose (-1), making the sum zero. This concept is fundamental in game theory and is often seen in financial markets during trading (particularly in derivatives and futures contracts) where for every profitable trade made by one party, there must be a corresponding loss incurred by another party, though real markets are typically not perfectly zero-sum due to factors like transaction costs, market maker spreads, and value creation through long-term investing.
-
-
-
-# Monte Carlo Tree Search (MCTS)
-
-Monte Carlo Tree Search is a heuristic search algorithm for decision-making processes that combines tree search with random sampling. It's particularly effective for problems with large decision spaces, like board games or planning problems.
-
-## How It Works
-
-1. **Selection**: 
-   - Start from root node
-   - Select most promising child nodes using UCB1 formula
-   - Continue until reaching an unexpanded node
-
-2. **Expansion**:
-   - Create one or more child nodes
-   - Add them to the tree
-
-3. **Simulation**:
-   - From the new node, perform a random playout
-   - Follow random moves until reaching terminal state
-
-4. **Backpropagation**:
-   - Update node statistics (visits and wins)
-   - Propagate results back up the tree
-
-## Key Advantages
-
-- Works without domain knowledge
-- Handles large search spaces efficiently
-- Provides anytime results
-- Naturally balances exploration vs exploitation
-
-## Applications
-
-- Game AI (Chess, Go, etc.)
-- Planning and scheduling
-- Optimization problems
-- Decision support systems
-
-## Formula
-
-The UCB1 formula used for node selection:
-
-UCB1 = \bar{X_i} + C\sqrt{\frac{\ln(N)}{n_i}}
-
-Where:
-- X̄ᵢ is the average reward
-- C is exploration constant
-- N is total parent visits
-- nᵢ is child node visits
-
-<br>
-
-![Alt text](./images/monte_carlo.png)
-
-<br>
-
-# MCTS Summary
-
-Initialize top-node for current state, loop over actions for some Nₜₒₜ:
-
-1. Start from the top-node, repeatedly pick the child-node with the largest U
-2. If N = 0 for the node, play a random game.
-   Else, expand node, play a random game from a randomly selected child
-3. Update statistics, back-propagate and update N and U as needed
-
-Select move with highest visit counts
+[image1]: https://user-images.githubusercontent.com/10624937/42135623-e770e354-7d12-11e8-998d-29fc74429ca2.gif "Trained Agent"
+[image2]: https://user-images.githubusercontent.com/10624937/42135622-e55fb586-7d12-11e8-8a54-3c31da15a90a.gif "Soccer"
 
 
-# AlphaZero Guided Tree Search
+# Project 3: Collaboration and Competition
 
-AlphaZero enhances the MCTS algorithm by using neural networks to guide the search:
+### Introduction
 
-## Key Modifications to MCTS
+For this project, you will work with the [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment.
 
-1. **Neural Network Guidance**:
-   - Instead of random playouts, uses a value network (v) to evaluate positions
-   - Uses a policy network (p) to guide node selection and expansion
-   - U is calculated using both UCB and policy network predictions
+![Trained Agent][image1]
 
-2. **Selection Formula**:
-   U(s,a) = Q(s,a) + c * p(s,a) * √(N(s))/(1 + N(s,a))
-   Where:
-   - Q(s,a): Average value from previous visits
-   - p(s,a): Policy network's predicted probability
-   - N(s): Parent node visits
-   - N(s,a): Child node visits
-   - c: Exploration constant
+In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1.  If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.  Thus, the goal of each agent is to keep the ball in play.
 
-3. **No Random Playouts**:
-   - Traditional MCTS: Random games until terminal state
-   - AlphaZero: Neural network evaluates position directly
+The observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. 
 
-4. **Parallel Simulations**:
-   - Multiple MCTS searches run in parallel
-   - Results aggregated to improve learning efficiency
+The task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,
 
-<br>
+- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.
+- This yields a single **score** for each episode.
 
-![Alt text](./images/AlphaZero.png)
+The environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.
 
-<br>
+### Getting Started
+
+1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
+    - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)
+    - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis.app.zip)
+    - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)
+    - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
+    
+    (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
+
+    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux_NoVis.zip) to obtain the "headless" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
+
+2. Place the file in the DRLND GitHub repository, in the `p3_collab-compet/` folder, and unzip (or decompress) the file. 
+
+### Instructions
+
+Follow the instructions in `Tennis.ipynb` to get started with training your own agent!  
+
+### (Optional) Challenge: Soccer Environment
+
+After you have successfully completed the project, you might like to solve the more difficult **Soccer** environment.
+
+![Soccer][image2]
+
+In this environment, the goal is to train a team of agents to play soccer.  
+
+You can read more about this environment in the ML-Agents GitHub [here](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#soccer-twos).  To solve this harder task, you'll need to download a new Unity environment.  (**Note**: Udacity students should not submit a project with this new environment.)
+
+You need only select the environment that matches your operating system:
+- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Linux.zip)
+- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer.app.zip)
+- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Windows_x86.zip)
+- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Windows_x86_64.zip)
+
+Then, place the file in the `p3_collab-compet/` folder in the DRLND GitHub repository, and unzip (or decompress) the file.  Next, open `Soccer.ipynb` and follow the instructions to learn how to use the Python API to control the agent.
+
+(_For AWS_) If you'd like to train the agents on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Linux_NoVis.zip) to obtain the "headless" version of the environment.  You will **not** be able to watch the agents without enabling a virtual screen, but you will be able to train the agents.  (_To watch the agents, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)
