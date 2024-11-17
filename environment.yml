@@ -248,7 +248,6 @@ dependencies:
   - prompt_toolkit=3.0.48=hd8ed1ab_0
   - propcache=0.2.0=py310ha75aee5_2
   - proto-plus=1.25.0=pyhd8ed1ab_0
-  - protobuf=5.28.3=py310hf71b8c6_0
   - psutil=6.1.0=py310ha75aee5_0
   - pthread-stubs=0.4=hb9d3cd8_1002
   - ptyprocess=0.7.0=pyhd3deb0d_0
@@ -347,4 +346,6 @@ dependencies:
   - zlib=1.2.13=h4ab18f5_6
   - zstandard=0.23.0=py310ha39cb0e_1
   - zstd=1.5.6=hc292b87_0
+  - pip:
+      - protobuf==3.20.3
 prefix: /home/ubuntu/miniconda3/envs/udacity_rl_new
