@@ -4,7 +4,7 @@ Multi-Agent Reinforcement Learning (MARL) is an extension of traditional reinfor
 
 <br>
 
-![Alt text](./images/chart.png)
+![Alt text](images/chart.png)
 
 <br>
 
@@ -51,7 +51,7 @@ Monte Carlo Tree Search is a heuristic search algorithm for decision-making proc
 
 ## How It Works
 
-1. **Selection**: 
+1. **Selection**:
    - Start from root node
    - Select most promising child nodes using UCB1 formula
    - Continue until reaching an unexpanded node
@@ -96,7 +96,7 @@ Where:
 
 <br>
 
-![Alt text](./images/monte_carlo.png)
+![Alt text](images/monte_carlo.png)
 
 <br>
 
@@ -142,6 +142,6 @@ AlphaZero enhances the MCTS algorithm by using neural networks to guide the sear
 
 <br>
 
-![Alt text](./images/AlphaZero.png)
+![Alt text](images/AlphaZero.png)
 
 <br>
